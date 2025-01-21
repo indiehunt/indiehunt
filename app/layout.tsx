@@ -28,20 +28,20 @@ declare global {
 }
 
 const { title, description, ogImage } = {
-  title: 'Dev Hunt – The best new Dev Tools every day.',
-  description: 'A launchpad for dev tools, built by developers for developers, open source, and fair.',
-  ogImage: 'https://devhunt.org/devhuntog.png?v=2',
+  title: 'Indie Hunt – The best new online products every day.',
+  description: 'A launchpad for online businesses built by passionate indie makers.',
+  ogImage: 'https://indiehunt.com',
 };
 
 export const metadata = {
   title,
   description,
-  metadataBase: new URL('https://devhunt.org'),
+  metadataBase: new URL('https://indiehunt.com'),
   openGraph: {
     title,
     description,
     images: [ogImage],
-    url: 'https://devhunt.org',
+    url: 'https://indiehunt.com',
   },
   twitter: {
     card: 'summary_large_image',
@@ -72,18 +72,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {process.env.USER_MAVEN_KEY && (
           <>
             <Script
-              src="https://analytic-api.marsx.dev/script.js"
-              strategy="afterInteractive"
-              data-website-id="505062d1-c921-4a96-ad67-63bcb082bdb2"
+            // src="https://analytic-api.marsx.dev/script.js"
+            // strategy="afterInteractive"
+            // data-website-id="505062d1-c921-4a96-ad67-63bcb082bdb2"
             />
             <Script
-              strategy="afterInteractive"
-              src="https://t.usermaven.com/lib.js"
-              data-key={process.env.USER_MAVEN_KEY}
-              data-tracking-host="https://events.usermaven.com"
-              data-autocapture="true"
-              data-privacy-policy="strict"
-              defer
+            // strategy="afterInteractive"
+            // src="https://t.usermaven.com/lib.js"
+            // data-key={process.env.USER_MAVEN_KEY}
+            // data-tracking-host="https://events.usermaven.com"
+            // data-autocapture="true"
+            // data-privacy-policy="strict"
+            // defer
             ></Script>
             <Script
               strategy="afterInteractive"
@@ -102,7 +102,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "ic87ytbm3p");
+    })(window, document, "clarity", "script", "wwww");
 `,
               }}
             />

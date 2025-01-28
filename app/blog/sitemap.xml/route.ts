@@ -20,7 +20,7 @@ export async function GET() {
       },
       body: JSON.stringify({
         query: `
-          query {
+          {
             articles(first: 100) {
               edges {
                 node {
@@ -33,12 +33,24 @@ export async function GET() {
           }
         `,
       }),
+      next: { revalidate: 3600 }, // Cache for 1 hour
     });
+
+    if (!response.ok) {
+      console.error('Product Hunt API error:', await response.text());
+      return new Response(getEmptySitemap(), {
+        headers: getSitemapHeaders(),
+      });
+    }
 
     const data = await response.json();
 
-    // Guard clause to handle missing data
-    if (!data?.data?.articles?.edges) {
+    // Add debug logging
+    console.log('Product Hunt API response:', JSON.stringify(data, null, 2));
+
+    // More robust data validation
+    if (!data?.data?.articles?.edges || !Array.isArray(data.data.articles.edges)) {
+      console.error('Invalid or missing articles data in response:', data);
       return new Response(getEmptySitemap(), {
         headers: getSitemapHeaders(),
       });
@@ -52,7 +64,7 @@ export async function GET() {
         .map(
           ({ node }) => `
         <url>
-          <loc>https://indiehunt.com/blog/${node.slug}</loc>
+          <loc>${process.env.NEXT_PUBLIC_SITE_URL}/blog/${node.slug}</loc>
           <lastmod>${new Date(node.updatedAt).toISOString()}</lastmod>
         </url>
       `,

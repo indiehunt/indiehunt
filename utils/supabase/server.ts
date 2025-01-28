@@ -1,6 +1,15 @@
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 import { cookies } from 'next/headers';
-import { type SupabaseClient, createServerComponentClient } from '@supabase/auth-helpers-nextjs';
-import { type Database } from '@/utils/supabase/types';
+import type { Database } from '@/lib/database.types';
 
-export const createServerClient = (): SupabaseClient<Database> =>
-  createServerComponentClient<Database>({ cookies });
+export function createServerClient() {
+  try {
+    const cookieStore = cookies();
+    return createServerComponentClient<Database>({
+      cookies: () => cookieStore,
+    });
+  } catch (error) {
+    console.error('Error creating Supabase client:', error);
+    return null;
+  }
+}
